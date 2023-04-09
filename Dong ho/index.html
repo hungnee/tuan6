@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="clock">00:00:00</div>
+    <div class="button">
+        <button onclick="startTimer()">Bắt đầu</button>
+        <button onclick="stopTimer()">Dừng</button>
+        <button onclick="resetTimer()">Đặt lại</button>
+    </div>
+
+    <script>
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+        let interval;
+
+        function startTimer() {
+            interval = setInterval(() => {
+                seconds++;
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes++;
+                }
+                if (minutes === 60) {
+                    minutes = 0;
+                    hours++;
+                }
+                updateClock();
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(interval);
+        }
+
+        function resetTimer() {
+            clearInterval(interval);
+            seconds = 0;
+            minutes = 0;
+            hours = 0;
+            updateClock();
+        }
+
+        function updateClock() {
+            const clock = document.getElementById("clock");
+            clock.textContent = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+        }
+    </script>
+</body>
+
+</html>
